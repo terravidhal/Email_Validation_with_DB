@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <!-- linking a css Boostrap -->
+  <link
+  rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+  integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+  crossorigin="anonymous"
+/>
+<!-- linking a css style sheet -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>show user {{User.id}}</title>
+</head>
+<body>
+    <div class="top-title">
+        <h1>User {{User.id}}</h1>
+        <a href="/users">Home</a> 
+    </div>
+    <div class="contain">
+        <p>Full Name : {{ User.first_name +'  '+ User.last_name  }}</p>
+        <p>Email : {{User.email}}</p>
+        <p>Created On : {{User.created_at}}</p> 
+        <p>Last Updated On : {{User.updated_at}}</p> 
+    </div>
+    <div class="show"><a href="/user/update/{{User.id}}">Edit</a> | <a href="/user/delete/{{User.id}}">Delete</a></div>
+</body>
+</html>
