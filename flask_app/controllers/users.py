@@ -1,5 +1,5 @@
 from flask_app import app
-from flask import Flask, render_template,redirect, request 
+from flask import Flask, render_template,redirect, request , session
 # import the class 'Users' from folder 'flask_app/models/user.py
 from flask_app.models.user import Users 
 
@@ -12,6 +12,7 @@ def home():
 @app.route("/users")
 def index():
    users = Users.get_all()
+   session.clear()
    return render_template("index.html",all_Users = users)
 
 
@@ -29,11 +30,14 @@ def create():
         "eml": request.form["inputEmail"]
     }
 
-    if not Users.validate_user_infos(datass): # ADD 'VALIDATE' METHOD USERS_INFOS
+    if not Users.validate_user_infos(datass) or not Users.is_unique_email(datass) : # ADD 'VALIDATE' METHOD USERS_INFOS AND UNIQUE EMAIL
+
+        #NINJA Bonus: Make it so the data the user input isn't lost when they have an error
+        session["first_name"] = request.form["inputName"]
+        session["last_name"] = request.form["inputlast_name"]
+        session["email"] = request.form["inputEmail"]
         return redirect("/")
     
-    if not Users.is_unique_email(datass): # ADD 'VALIDATE' METHOD UNIQUE EMAIL
-        return redirect("/")
     
     Users.create_user(datass)
     return redirect('/users')
@@ -75,6 +79,9 @@ def delete(user_id):
 
 
 
-
-    
+@app.errorhandler(404)  # we specify in parameter here the type of error, here it is 404
+def page_not_found(
+    error,
+):  # (error) is important because it recovers the instance of the error that was thrown
+    return f"<h2 style='text-align:center;padding-top:40px'>Error 404. Sorry! No response. Try again</h2>"    
 

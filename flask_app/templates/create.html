@@ -24,19 +24,19 @@
       <div class="form-row">
         <div class="form-group col-md-12">
           <label for="inputName">First Name</label>
-          <input type="text" class="form-control" name="inputName" id="inputName">
+          <input type="text" class="form-control" name="inputName" value="{{session['first_name']}}" id="inputName">
         </div>
       </div>
       <div class="form-row">
         <div class="form-group col-md-12">
           <label for="inputlast_name">Last Name</label>
-          <input type="text" class="form-control" name="inputlast_name" id="inputlast_name">
+          <input type="text" class="form-control" name="inputlast_name" value="{{session['last_name']}}" id="inputlast_name">
         </div>
       </div>
       <div class="form-row">
         <div class="form-group col-md-12">
           <label for="inputEmail">Email</label>
-          <input type="email" class="form-control" name="inputEmail" id="inputEmail">
+          <input type="email" class="form-control" name="inputEmail" value="{{session['email']}}" id="inputEmail">
         </div>
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
